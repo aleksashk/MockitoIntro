@@ -2,6 +2,8 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class CarTest {
@@ -27,6 +29,14 @@ class CarTest {
         when(newCar.getOwner()).thenReturn("Aleksandr");
 
         assertEquals("Aleksandr", newCar.getOwner());
+    }
+
+    @Test
+    void verificationTest(){
+        Car newCar = Mockito.mock(Car.class);
+        assertNull(newCar.getOwner());
+
+        verify(newCar).getOwner();
     }
 
 }
