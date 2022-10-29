@@ -1,23 +1,34 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
+import org.mockito.MockitoAnnotations;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 class CarTest {
 
+    @Mock
+    Car newCar;
+
+    @BeforeEach
+    void setUp() {
+        MockitoAnnotations.initMocks(this);
+    }
+
     @Test
     void createCar() {
-        Car newCar = Mockito.mock(Car.class);
-
         assertEquals(0, newCar.getYear());
     }
 
     @Test
     void remoteServiceReturnValue() {
-        Car newCar = Mockito.mock(Car.class);
         when(newCar.testInt(4)).thenReturn(10);
 
         assertEquals(10, newCar.testInt(4));
@@ -25,18 +36,16 @@ class CarTest {
 
     @Test
     void getOwner() {
-        Car newCar = Mockito.mock(Car.class);
         when(newCar.getOwner()).thenReturn("Aleksandr");
 
         assertEquals("Aleksandr", newCar.getOwner());
     }
 
     @Test
-    void verificationTest(){
-        Car newCar = Mockito.mock(Car.class);
+    void verificationTest() {
         assertNull(newCar.getOwner());
 
-        verify(newCar).getOwner();
+        verify(newCar, atLeast(1)).getOwner();//time(1); never; atLeast; atMost; only
     }
 
 }
