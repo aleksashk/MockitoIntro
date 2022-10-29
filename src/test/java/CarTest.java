@@ -21,4 +21,12 @@ class CarTest {
         assertEquals(10, newCar.testInt(4));
     }
 
+    @Test
+    void getOwner() {
+        Car newCar = Mockito.mock(Car.class);
+        when(newCar.getOwner()).thenReturn("Aleksandr");
+
+        assertEquals("Aleksandr", newCar.getOwner());
+    }
+
 }
